@@ -18,6 +18,7 @@ func _ready():
 
 func setup_entities() -> void: 
 	player = scene_snake.instance() as Node2D
+	player.connect("move_triggered", self, "_on_Snake_move_triggered")
 	add_child(player)
 	grid.place_entity_at_random_pos(player)
 	
@@ -25,3 +26,5 @@ func setup_entities() -> void:
 	add_child(food_instance)
 	grid.place_entity_at_random_pos(food_instance)
 
+func _on_Snake_move_triggered(entity: Node2D, direction: Vector2) -> void:
+	grid.move_entity_in_direction(entity, direction)

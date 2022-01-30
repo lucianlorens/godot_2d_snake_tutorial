@@ -17,10 +17,6 @@ func setup_grid() -> void:
 		grid.append([])
 		for y in range(grid_size.y):
 			grid[x].append(null)
-#	for x in range(grid_size.x):
-#		grid[x] = []
-#		for y in range(grid_size.y):
-#			grid[x][y] = 0
 
 
 func get_entity_of_cell(grid_pos: Vector2) -> Node2D: 
@@ -47,3 +43,10 @@ func place_entity_at_random_pos(entity: Node2D) -> void:
 			has_random_pos = true
 
 	place_entity(entity, random_grid_pos)
+
+func move_entity_in_direction(entity: Node2D, direction: Vector2) -> void:
+	var old_grid_pos: Vector2 = world_to_map(entity.position)
+	var new_grid_pos: Vector2 = old_grid_pos + direction
+	
+	set_entity_in_cell(null, old_grid_pos)
+	place_entity(entity, new_grid_pos)
